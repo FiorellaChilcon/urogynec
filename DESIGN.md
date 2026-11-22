@@ -110,6 +110,14 @@ header height. The full logo survives for documents, the favicon and sharing.
 - **Pending contact row**: dashed border plus an amber note. Placeholders are
   marked, never dressed up as real values.
 
+## Head and language
+
+`useDocumentHead()` watches the active locale and keeps `<html lang>`, the
+title, the description and the OG title/description/locale in step. This is a
+single route, so nothing varies per page; language is the only axis. Social
+crawlers do not run JavaScript, so the static tags in `index.html` stay the
+source of truth for sharing.
+
 ## Content and language
 
 - English default, Spanish toggle, persisted to `localStorage`, `<html lang>`

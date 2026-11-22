@@ -23,21 +23,9 @@ export const i18n = createI18n({
   messages: { en, es },
 })
 
-/** Keep the document itself translated, not just the rendered app. */
-function applyDocumentLocale(locale: Locale) {
-  const messages = { en, es }[locale]
-  document.documentElement.lang = locale
-  document.title = messages.meta.title
-  document
-    .querySelector('meta[name="description"]')
-    ?.setAttribute('content', messages.meta.description)
-  document.querySelector('meta[property="og:locale"]')?.setAttribute('content', messages.meta.ogLocale)
-}
-
+/** Changing the locale is all this module does. The head follows it reactively
+ *  in useDocumentHead(). */
 export function setLocale(locale: Locale) {
   i18n.global.locale.value = locale
   localStorage.setItem(STORAGE_KEY, locale)
-  applyDocumentLocale(locale)
 }
-
-applyDocumentLocale(preferred)

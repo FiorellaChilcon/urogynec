@@ -7,8 +7,11 @@ import SpecialtiesSection from './components/SpecialtiesSection.vue'
 import CompanySection from './components/CompanySection.vue'
 import ContactSection from './components/ContactSection.vue'
 import SiteFooter from './components/SiteFooter.vue'
+import { useDocumentHead } from './useDocumentHead'
 
 const { t } = useI18n()
+
+useDocumentHead()
 </script>
 
 <template>

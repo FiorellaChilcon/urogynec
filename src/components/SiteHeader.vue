@@ -1,9 +1,8 @@
 <script setup lang="ts">
+import markUrl from '../assets/logo-mark-reverse.svg?url'
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { locales, setLocale, type Locale } from '../i18n'
-
-const markUrl = `${import.meta.env.BASE_URL}logo-mark-reverse.svg`
 
 const { locale, t } = useI18n()
 const scrolled = ref(false)

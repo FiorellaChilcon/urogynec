@@ -46,10 +46,13 @@ The canonical URL, the sitemap and the social-card URLs all assume
 - `src/locales/*.json`: every visible string, including the instrument
   vocabulary (`component.*`, `variant.*`) and the per-language page title and
   meta description. Specs stay language-neutral.
-- `public/plates/p02…p17.webp`: the scanned catalogue pages, extracted with
-  `pdfimages` and converted with `cwebp`.
+- `src/assets/plates/p02…p17.webp`: the scanned catalogue pages, extracted with
+  `pdfimages` and converted with `cwebp`. They are bundled assets, so Vite
+  hashes them, applies the base path and fails the build if one goes missing.
 - `public/techno-standard-urology-catalogue-2026.pdf`: the original, offered as
-  a download.
+  a download. It stays in `public/` on purpose: it is a link people share, so
+  the URL must be stable and unhashed. That is the one place
+  `import.meta.env.BASE_URL` is still needed.
 
 ## Logo assets
 
@@ -61,7 +64,7 @@ colours and tracing each with potrace:
 | `public/logo.svg` | Full logo, brand colours, for light backgrounds |
 | `public/logo-reverse.svg` | Full logo, light on dark |
 | `public/logo-mark.svg` | Mark only, brand colours |
-| `public/logo-mark-reverse.svg` | Mark only, light on dark. Used in the header |
+| `src/assets/logo-mark-reverse.svg` | Mark only, light on dark. Imported by the header |
 | `public/logo.png` | Transparent PNG, 1200px wide, for documents and messaging |
 | `public/favicon.png` | Mark only, 256px, transparent |
 | `public/og.png` | 1200x630 social card |

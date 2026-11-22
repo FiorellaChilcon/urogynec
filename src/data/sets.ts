@@ -45,7 +45,23 @@ export interface InstrumentSet {
   components: Component[]
 }
 
-const plate = (n: number) => `${import.meta.env.BASE_URL}plates/p${String(n).padStart(2, '0')}.webp`
+/**
+ * Plates are bundled assets, not public files: Vite resolves, hashes and
+ * base-paths them at build time, so a missing plate fails the build instead
+ * of 404-ing in a client's browser.
+ */
+const plates = import.meta.glob<string>('../assets/plates/*.webp', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+})
+
+const plate = (n: number): string => {
+  const key = `../assets/plates/p${String(n).padStart(2, '0')}.webp`
+  const url = plates[key]
+  if (!url) throw new Error(`Catalogue plate missing: ${key}`)
+  return url
+}
 
 export const sets: InstrumentSet[] = [
   {

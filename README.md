@@ -72,6 +72,17 @@ colours and tracing each with potrace:
 Brand colours: `#2C415A` navy, `#589C9F` teal. Reverse variants use `#E8F0EF`
 and `#3FC9C9`.
 
+## Head and SEO
+
+`src/useSiteHead.ts` uses `@unhead/vue` to declare title, description,
+canonical, Open Graph and Twitter tags as computed values on the active locale.
+`index.html` carries the same tags statically for crawlers that do not run
+JavaScript. If the site ever grows a router, per-route meta is a `useSeoMeta()`
+call in the route component; nothing else changes.
+
+Careful with copy: `|` is vue-i18n's plural separator and silently truncates a
+message. Use `·`.
+
 ## Design system
 
 Defined once as a Tailwind theme in `src/styles/base.css` under `@theme`, so

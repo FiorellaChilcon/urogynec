@@ -112,11 +112,15 @@ header height. The full logo survives for documents, the favicon and sharing.
 
 ## Head and language
 
-`useDocumentHead()` watches the active locale and keeps `<html lang>`, the
-title, the description and the OG title/description/locale in step. This is a
-single route, so nothing varies per page; language is the only axis. Social
-crawlers do not run JavaScript, so the static tags in `index.html` stay the
-source of truth for sharing.
+`useSiteHead()` (`@unhead/vue`) declares the head as computed values on the
+active locale: `<html lang>`, title, description, canonical, the Open Graph set
+and the Twitter card. This is a single route, so nothing varies per page;
+language is the only axis. `index.html` keeps a static copy of the same tags
+because social crawlers do not run JavaScript, and unhead reconciles against
+them rather than duplicating them.
+
+A pipe character is vue-i18n's plural separator, so it can never appear in a
+message string. Titles use `·`.
 
 ## Content and language
 

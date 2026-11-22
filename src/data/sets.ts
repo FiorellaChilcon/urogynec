@@ -30,7 +30,7 @@ export interface InstrumentSet {
   specialty: Specialty
   /** Catalogue page number as printed. */
   page: number
-  plate: string
+  plate: Plate
   /** i18n key under `family.*`. Groups the catalogue. */
   family: string
   variant?: string
@@ -49,18 +49,34 @@ export interface InstrumentSet {
  * Plates are bundled assets, not public files: Vite resolves, hashes and
  * base-paths them at build time, so a missing plate fails the build instead
  * of 404-ing in a client's browser.
+ *
+ * vite-imagetools renders each plate at three widths so a phone downloads a
+ * 480px image instead of the 1400px one the dialog needs.
  */
-const plates = import.meta.glob<string>('../assets/plates/*.webp', {
+const plateSrcsets = import.meta.glob<string>('../assets/plates/*.webp', {
   eager: true,
-  query: '?url',
+  query: '?w=480;880;1400&format=webp&as=srcset',
   import: 'default',
 })
 
-const plate = (n: number): string => {
+const plateUrls = import.meta.glob<string>('../assets/plates/*.webp', {
+  eager: true,
+  query: '?w=880&format=webp&url',
+  import: 'default',
+})
+
+export interface Plate {
+  /** Fallback for browsers that ignore srcset. */
+  src: string
+  srcset: string
+}
+
+const plate = (n: number): Plate => {
   const key = `../assets/plates/p${String(n).padStart(2, '0')}.webp`
-  const url = plates[key]
-  if (!url) throw new Error(`Catalogue plate missing: ${key}`)
-  return url
+  const src = plateUrls[key]
+  const srcset = plateSrcsets[key]
+  if (!src || !srcset) throw new Error(`Catalogue plate missing: ${key}`)
+  return { src, srcset }
 }
 
 export const sets: InstrumentSet[] = [

@@ -23,7 +23,9 @@ const eager = (props.index ?? 99) < 6
 
     <div class="relative overflow-hidden border-b border-plate-line bg-plate-050">
       <img
-        :src="set.plate"
+        :src="set.plate.src"
+        :srcset="set.plate.srcset"
+        sizes="(min-width: 58rem) 45vw, 92vw"
         alt=""
         :loading="eager ? 'eager' : 'lazy'"
         decoding="async"

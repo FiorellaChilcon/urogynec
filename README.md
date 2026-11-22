@@ -49,6 +49,10 @@ The canonical URL, the sitemap and the social-card URLs all assume
 - `src/assets/plates/p02…p17.webp`: the scanned catalogue pages, extracted with
   `pdfimages` and converted with `cwebp`. They are bundled assets, so Vite
   hashes them, applies the base path and fails the build if one goes missing.
+  `vite-imagetools` renders each one at 480 / 880 / 1400px and the components
+  ship a `srcset` with a `sizes` hint, so a phone downloads 245 KB of plates
+  where it used to download 984 KB. The 1400px version is only fetched when
+  someone opens a plate on a wide screen.
 - `public/techno-standard-urology-catalogue-2026.pdf`: the original, offered as
   a download. It stays in `public/` on purpose: it is a link people share, so
   the URL must be stable and unhashed. That is the one place

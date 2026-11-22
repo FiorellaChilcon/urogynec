@@ -63,7 +63,9 @@ watch(
           class="m-0 border-b border-plate-line bg-plate-050 p-3 sm:p-6 lg:border-r lg:border-b-0"
         >
           <img
-            :src="set.plate"
+            :src="set.plate.src"
+            :srcset="set.plate.srcset"
+            sizes="(min-width: 62rem) 55vw, 94vw"
             :alt="t('catalogue.plateOf', { page: set.page, name: setName(set) })"
             width="1400"
             height="1896"

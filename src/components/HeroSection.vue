@@ -46,7 +46,9 @@ const sparse = new Set([min, 21, max])
         class="relative m-0 border border-plate-line bg-[linear-gradient(104deg,var(--color-plate-000)_0%,var(--color-plate-050)_55%,var(--color-plate-100)_100%)] px-4 pt-4 pb-2.5 shadow-plate lg:-mr-page"
       >
         <img
-          :src="hero.plate"
+          :src="hero.plate.src"
+          :srcset="hero.plate.srcset"
+          sizes="(min-width: 60rem) 48vw, 92vw"
           :alt="t('hero.plateAlt')"
           width="1400"
           height="1896"

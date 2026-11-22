@@ -91,6 +91,10 @@ header height. The full logo survives for documents, the favicon and sharing.
 
 ## Components
 
+Plates are served responsively: `vite-imagetools` emits 480 / 880 / 1400px
+variants and each image site declares its own `sizes`, because the card slot,
+the hero column and the opened plate are three different widths.
+
 - **Plate card** (`SetCard.vue`): the catalogue unit. A plate strip framed
   `1400 / 420` showing ~19% of the scanned page at full width (long thin
   instruments want a long thin frame), then model code, name, gauge chips, and a

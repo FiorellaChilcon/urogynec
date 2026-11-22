@@ -1,0 +1,246 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/archivo';
+@import '@fontsource-variable/martian-mono';
+
+/* ── Sterile Field design system ──────────────────────────────────────────
+   Deep surgical drape under raking light; instruments ride light tray
+   plates. Teal is the active mark only. Every token below is a Tailwind
+   utility: --color-drape-800 gives bg-drape-800 / text-drape-800 /
+   border-drape-800, --text-display gives text-display, and so on.
+   ────────────────────────────────────────────────────────────────────── */
+
+@theme {
+  /* Drape: the ground. */
+  --color-drape-900: #061d20;
+  --color-drape-800: #0c2c30;
+  --color-drape-700: #103b40;
+  --color-drape-600: #164c52;
+  --color-drape-line: #23585f;
+
+  /* Plate: the lit tray the instruments sit on. */
+  --color-plate-000: #ffffff;
+  --color-plate-050: #f4f6f6;
+  --color-plate-100: #e9eded;
+  --color-plate-line: #d3dadb;
+
+  /* Ink on plates. */
+  --color-ink-900: #0a1f28;
+  --color-ink-700: #22414e;
+  --color-ink-500: #4c6a76;
+
+  /* Type on drape. Dim is tinted from the drape hue, never gray. */
+  --color-on-drape: #e8f0ef;
+  --color-on-drape-dim: #9db4b8;
+  --color-on-drape-mute: #7d9a9e;
+
+  /* The active mark, and nothing else. */
+  --color-teal-400: #3fc9c9;
+  --color-teal-500: #2aa6a2;
+  --color-teal-600: #1d7b78;
+
+  /* A placeholder that must not be mistaken for a real value. */
+  --color-pending: #d9ad72;
+
+  --font-sans: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Martian Mono Variable', ui-monospace, 'SF Mono', monospace;
+
+  /* Display scale: fluid, tracking tightens as size grows. */
+  --text-display: clamp(2.4rem, 1.1rem + 5.4vw, 5.1rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.035em;
+  --text-section: clamp(2rem, 1.2rem + 3vw, 3.5rem);
+  --text-section--line-height: 1.04;
+  --text-section--letter-spacing: -0.03em;
+  --text-lead: clamp(1rem, 0.94rem + 0.3vw, 1.15rem);
+  --text-lead--line-height: 1.6;
+  --text-code: 0.72rem;
+  --text-code--line-height: 1.4;
+  --text-code--letter-spacing: 0.02em;
+  --text-label: 0.68rem;
+  --text-label--line-height: 1.3;
+  --text-label--letter-spacing: 0.14em;
+
+  /* Page gutter, used as a utility (px-page) and in negative bleeds. */
+  --spacing-page: clamp(1.25rem, 5vw, 5rem);
+  --spacing-section: clamp(3.5rem, 8vw, 7rem);
+
+  /* Real offset plus soft blur, tinted from the drape. */
+  --shadow-plate: 0 1px 2px rgb(3 16 22 / 0.28), 0 14px 32px -12px rgb(3 16 22 / 0.5);
+  --shadow-lift: 0 2px 4px rgb(10 31 40 / 0.1), 0 22px 44px -20px rgb(10 31 40 / 0.4);
+  --shadow-sheet: 0 40px 90px -30px rgb(3 16 22 / 0.75);
+
+  --ease-raking: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --container-shell: 92rem;
+
+  /* The world is square-cornered. */
+  --radius-none: 0px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* anchors must clear the sticky header */
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+    color-scheme: dark;
+    accent-color: var(--color-teal-500);
+  }
+
+  body {
+    @apply bg-drape-900 font-sans text-on-drape antialiased;
+    font-size: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+    line-height: 1.6;
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-weight: 620;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  a {
+    color: inherit;
+    text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+  }
+
+  /* Browser surfaces wear the palette too. */
+  ::selection {
+    background: var(--color-teal-500);
+    color: #04161c;
+  }
+
+  ::placeholder {
+    color: var(--color-ink-500);
+    opacity: 1;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-teal-400);
+    outline-offset: 3px;
+  }
+
+  * {
+    scrollbar-color: var(--color-drape-600) var(--color-drape-900);
+    scrollbar-width: thin;
+  }
+
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-drape-900);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-drape-600);
+    border: 3px solid var(--color-drape-900);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-teal-600);
+  }
+}
+
+@layer components {
+  /* Page gutter + max measure, used by every section. */
+  .page {
+    @apply mx-auto w-full max-w-shell px-page;
+  }
+
+  .code {
+    @apply font-mono tabular-nums;
+    font-weight: 500;
+  }
+
+  .btn {
+    @apply inline-flex cursor-pointer items-center gap-2.5 border px-5 py-3 text-sm no-underline;
+    @apply border-teal-500 bg-teal-500 text-[#04161c];
+    font-weight: 560;
+    letter-spacing: -0.012em;
+    transition:
+      background-color 0.25s var(--ease-raking),
+      border-color 0.25s var(--ease-raking),
+      transform 0.25s var(--ease-raking);
+  }
+
+  .btn:hover {
+    @apply border-teal-400 bg-teal-400;
+    transform: translateY(-1px);
+  }
+
+  .btn:active {
+    transform: translateY(0);
+  }
+
+  .btn-ghost {
+    @apply border-drape-line bg-transparent text-on-drape;
+  }
+
+  .btn-ghost:hover {
+    @apply border-teal-600 bg-drape-700 text-on-drape;
+  }
+
+  .btn-light {
+    @apply border-plate-line bg-transparent text-ink-900;
+  }
+
+  .btn-light:hover {
+    @apply border-ink-500 bg-plate-100 text-ink-900;
+  }
+
+  .skip-link {
+    @apply absolute top-2 left-2 z-100 bg-teal-500 px-4 py-2.5 font-semibold text-[#04161c] no-underline;
+    transform: translateY(-160%);
+    transition: transform 0.2s var(--ease-raking);
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+}
+
+@layer utilities {
+  /* One authored moment: the light rakes across the plate once, on arrival. */
+  @keyframes rake {
+    to {
+      transform: translateX(130%);
+    }
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+  }
+
+  .animate-rake {
+    animation: rake 1.7s 0.35s var(--ease-raking) both;
+  }
+
+  .animate-rise {
+    animation: rise 0.34s var(--ease-raking);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

@@ -91,6 +91,10 @@ header height. The full logo survives for documents, the favicon and sharing.
 
 ## Components
 
+Several gynecology sets share one scanned page, so each set carries its own
+`focus` percentage: the card window is ~22% of the plate height and is placed to
+land on that set's instruments rather than the printed heading above them.
+
 Plates are served responsively: `vite-imagetools` emits 480 / 880 / 1400px
 variants and each image site declares its own `sizes`, because the card slot,
 the hero column and the opened plate are three different widths.
@@ -103,6 +107,11 @@ the hero column and the opened plate are three different widths.
 - **Plate dialog** (`PlateDialog.vue`): native `<dialog>`. The scanned catalogue
   page on the left, the real selectable part table on the right, one WhatsApp
   action prefilled with the set's name and model.
+- **Specialty segment** - the catalogue's primary split (All / Urology /
+  Gynecology). Active segment fills with teal, unlike the family chips which
+  invert to drape, so the two filter levels never read as one row of equals.
+  The family chips are derived from the sets in the chosen specialty, so
+  "Resectoscopy" disappears when browsing gynecology.
 - **Filter bar**: square chips, active chip inverts to drape; a single search
   field that matches model, set name, family, compatibility, component names,
   part codes and specs, accent- and punctuation-insensitive, in the active

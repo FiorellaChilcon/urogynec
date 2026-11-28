@@ -34,7 +34,8 @@ A specialist, not a general medical marketplace: Techno Standard Corp. has distr
 
 - Static site. No backend, no cart, no prices, no inventory.
 - Content source of truth: `Urology Gynecology Catalog 2026.pdf` (18 pages, scanned images: no selectable text), `Home Web Urogyn.docx` (company copy, ES + EN), `logo.jpeg`.
-- Catalogue covers 16 urology instrument sets/option pages. **Gynecology product pages do not exist yet.** Gynecology ships as a stated capability only; the data model must carry a specialty field so a gynecology catalogue drops in later without restructuring.
+- Catalogue covers 27 sets across two specialties: 16 urology (plates 1-16) and 11 gynecology (plates 1-6, several sets per plate). Both specialties are fully catalogued as of 2026-11-28. The data model carries a `specialty` field and the catalogue is filtered by it.
+- The gynecology catalogue cover carries a second brand mark, "mienna", above the Techno Standard logo. Its relationship to the company is **not established**; it is not used anywhere on the site.
 - Languages: English default, Spanish toggle, strings in JSON translation files.
 - Contact: address 83 Lewis St, Perth Amboy, NJ 08066, USA. WhatsApp +51 985250146 (confirmed). Email and office phone are **placeholders to be replaced by the owner**: never present an invented address as real.
 

@@ -20,7 +20,7 @@
   "hero": {
     "headline": "Urology & gynecology instruments,",
     "headlineAccent": "laid out set by set.",
-    "lead": "Techno Standard Corp. has supplied rigid endoscopic instrumentation to urologists and gynecologists in dozens of countries since 2000. The full 2026 urology catalogue is below: every set, every part code, every French gauge.",
+    "lead": "Techno Standard Corp. has supplied rigid endoscopic instrumentation to urologists and gynecologists in dozens of countries since 2000. Both 2026 catalogues are below: every set, every part code, every French gauge.",
     "ctaCatalogue": "Browse the catalogue",
     "ctaWhatsapp": "Ask on WhatsApp",
     "setsLabel": "instrument sets",
@@ -30,7 +30,7 @@
   },
   "catalogue": {
     "title": "2026 catalogue",
-    "lead": "Sixteen plates, as printed. Search by part code, instrument or French gauge.",
+    "lead": "Twenty-two plates across two specialties, as printed. Search by part code, instrument or French gauge.",
     "searchLabel": "Search the catalogue",
     "searchPlaceholder": "e.g. N6004, resectoscope, 21 Fr",
     "clear": "Clear",
@@ -46,11 +46,18 @@
     "plateOf": "Catalogue plate {page}: {name}",
     "enquire": "Enquire about this set",
     "downloadPdf": "Download the full PDF catalogue",
-    "pdfMeta": "18 pages · 2.4 MB",
+    "pdfMeta": "{pages} pages · {mb} MB",
     "colCode": "Code",
     "colItem": "Item",
     "colSpec": "Specification",
-    "dialogLabel": "Catalogue plate"
+    "dialogLabel": "Catalogue plate",
+    "specialtyLabel": "Filter by specialty",
+    "familyLabel": "Filter by instrument family",
+    "allFamilies": "All instruments",
+    "download": {
+      "urology": "Urology PDF",
+      "gynecology": "Gynecology PDF"
+    }
   },
   "family": {
     "cystoscopy": "Cystoscopy",
@@ -59,7 +66,9 @@
     "lithotripsy": "Lithotripsy",
     "ureteroscopy": "Ureteroscopy",
     "resectoscopy": "Resectoscopy",
-    "options": "Instruments & options"
+    "options": "Instruments & options",
+    "hysteroscopy": "Hysteroscopy",
+    "hysterectomy": "Hysterectomy"
   },
   "set": {
     "urethroCystoscopy": "Urethro-cystoscopy set",
@@ -74,7 +83,10 @@
     "resectoscopyGyrus": "Resectoscopy set for Gyrus",
     "opticalForcepsDilators": "Optical forceps & urethral dilators",
     "accessInstruments": "Trocars, needles & adaptors",
-    "electrodesEndoscopes": "Electrodes & endoscopes"
+    "electrodesEndoscopes": "Electrodes & endoscopes",
+    "hysteroscopy": "Hysteroscopy set",
+    "electricHysteraCutter": "Electric hystera-cutter",
+    "gynecologyInstruments": "Gynecology instruments"
   },
   "variant": {
     "lockable": "lockable",
@@ -108,7 +120,12 @@
     "multifunction": "multifunction",
     "pediatric": "pediatric",
     "autoclavable": "autoclavable",
-    "lockableShort": "lockable"
+    "lockableShort": "lockable",
+    "fourClaws": "four claws",
+    "doubleHeads": "double heads",
+    "operatingRigid": "operating, rigid",
+    "lavh": "LAVH",
+    "tah": "TAH"
   },
   "component": {
     "endoscope": "Endoscope",
@@ -165,15 +182,31 @@
     "maleUrethralDilator": "Male urethral dilator",
     "femaleUrethralDilator": "Female urethral dilator",
     "filarSoundDilator": "Urethral filar sound dilator, with knife",
-    "penisClamp": "Penis clamp"
+    "penisClamp": "Penis clamp",
+    "operatingInnerSheath": "Operating inner sheath",
+    "operatingSheath": "Operating sheath",
+    "loopCatchingForceps": "Loop catching forceps",
+    "cuttingTube": "Cutting tube",
+    "uterusMeasuringStick": "Uterus measuring stick",
+    "movingBar": "Moving bar",
+    "hysteromyomaDrill": "Hysteromyoma drill",
+    "cervicalForceps": "Cervical forceps",
+    "uterineManipulator": "Uterine manipulator",
+    "trocarSleeve": "Trocar sleeve",
+    "reducer": "Reducer",
+    "knotPusher": "Knot pusher",
+    "vaginalSpeculum": "Vaginal speculum",
+    "cervicalPolypForceps": "Cervical polyp forceps",
+    "myomaElevator": "Myoma elevator",
+    "oviductLigatureForceps": "Oviduct ligature forceps"
   },
   "specialties": {
     "title": "Two specialties",
     "urologyTitle": "Urology",
     "urologyLead": "Fully catalogued for 2026. Sixteen plates of sets, components and options.",
     "gynecologyTitle": "Gynecology",
-    "gynecologyLead": "Supplied since 2000, catalogue in preparation. Ask us for availability and codes on any of the lines below.",
-    "gynecologyCta": "Request gynecology codes",
+    "gynecologyLead": "Fully catalogued for 2026. Hysteroscopy sets, the electric hystera-cutter and gynecology instruments.",
+    "gynecologyCta": "Browse the gynecology sets",
     "urologyLines": [
       "Cystoscopes",
       "Ureteroscopes",
@@ -190,7 +223,8 @@
       "Resectoscopes",
       "Fiber optics",
       "Forceps"
-    ]
+    ],
+    "urologyCta": "Browse the urology sets"
   },
   "company": {
     "title": "The company",
@@ -220,11 +254,11 @@
   },
   "footer": {
     "rights": "Techno Standard Corp. · Urology & gynecology instruments.",
-    "pdf": "PDF catalogue"
+    "pdf": "PDF catalogues"
   },
   "meta": {
     "title": "Urogynec Instruments · Urology & gynecology instruments",
-    "description": "Rigid endoscopic instruments for urology and gynecology from Techno Standard Corp. (USA). Cystoscopy, ureterorenoscopy, nephroscopy, urethrotomy and resectoscopy sets with full part codes and French gauges. Supplying since 2000.",
+    "description": "Rigid endoscopic instruments for urology and gynecology from Techno Standard Corp. (USA). Cystoscopy, ureterorenoscopy, nephroscopy, urethrotomy, resectoscopy and hysteroscopy sets with full part codes and French gauges. Supplying since 2000.",
     "ogLocale": "en_US"
   }
 }

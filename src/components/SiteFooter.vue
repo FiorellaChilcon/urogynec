@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { catalogues } from '../data/catalogues'
 
 const { t } = useI18n()
 const year = new Date().getFullYear()
-const pdfUrl = `${import.meta.env.BASE_URL}techno-standard-urology-catalogue-2026.pdf`
 </script>
 
 <template>
@@ -23,13 +23,17 @@ const pdfUrl = `${import.meta.env.BASE_URL}techno-standard-urology-catalogue-202
 
     <div class="page flex flex-wrap items-baseline gap-x-8 gap-y-2 text-[0.82rem] text-on-drape-dim">
       <p><span class="tabular-nums">© {{ year }}</span> {{ t('footer.rights') }}</p>
-      <a
-        class="ml-auto border-b border-transparent text-teal-400 no-underline transition-colors hover:border-teal-400"
-        :href="pdfUrl"
-        download
-      >
-        {{ t('footer.pdf') }} ↓
-      </a>
+      <span class="ml-auto flex flex-wrap gap-x-4 gap-y-1">
+        <a
+          v-for="c in catalogues"
+          :key="c.specialty"
+          class="border-b border-transparent text-teal-400 no-underline transition-colors hover:border-teal-400"
+          :href="c.url"
+          download
+        >
+          {{ t(`catalogue.download.${c.specialty}`) }} ↓
+        </a>
+      </span>
     </div>
   </footer>
 </template>

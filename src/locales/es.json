@@ -20,7 +20,7 @@
   "hero": {
     "headline": "Instrumentos de urología y ginecología,",
     "headlineAccent": "equipo por equipo.",
-    "lead": "Techno Standard Corp. suministra instrumental endoscópico rígido a urólogos y ginecólogos en decenas de países desde el año 2000. El catálogo completo de urología 2026 está aquí abajo: cada equipo, cada código y cada calibre French.",
+    "lead": "Techno Standard Corp. suministra instrumental endoscópico rígido a urólogos y ginecólogos en decenas de países desde el año 2000. Ambos catálogos 2026 están aquí abajo: cada equipo, cada código y cada calibre French.",
     "ctaCatalogue": "Ver el catálogo",
     "ctaWhatsapp": "Consultar por WhatsApp",
     "setsLabel": "equipos",
@@ -30,7 +30,7 @@
   },
   "catalogue": {
     "title": "Catálogo 2026",
-    "lead": "Dieciséis láminas, tal como están impresas. Busque por código, instrumento o calibre French.",
+    "lead": "Veintidós láminas de dos especialidades, tal como están impresas. Busque por código, instrumento o calibre French.",
     "searchLabel": "Buscar en el catálogo",
     "searchPlaceholder": "p. ej. N6004, resectoscopio, 21 Fr",
     "clear": "Limpiar",
@@ -46,11 +46,18 @@
     "plateOf": "Lámina {page} del catálogo: {name}",
     "enquire": "Consultar por este equipo",
     "downloadPdf": "Descargar el catálogo en PDF",
-    "pdfMeta": "18 páginas · 2,4 MB",
+    "pdfMeta": "{pages} páginas · {mb} MB",
     "colCode": "Código",
     "colItem": "Artículo",
     "colSpec": "Especificación",
-    "dialogLabel": "Lámina del catálogo"
+    "dialogLabel": "Lámina del catálogo",
+    "specialtyLabel": "Filtrar por especialidad",
+    "familyLabel": "Filtrar por familia de instrumentos",
+    "allFamilies": "Todos los instrumentos",
+    "download": {
+      "urology": "PDF de urología",
+      "gynecology": "PDF de ginecología"
+    }
   },
   "family": {
     "cystoscopy": "Cistoscopía",
@@ -59,7 +66,9 @@
     "lithotripsy": "Litotricia",
     "ureteroscopy": "Ureteroscopía",
     "resectoscopy": "Resectoscopía",
-    "options": "Instrumentos y opciones"
+    "options": "Instrumentos y opciones",
+    "hysteroscopy": "Histeroscopía",
+    "hysterectomy": "Histerectomía"
   },
   "set": {
     "urethroCystoscopy": "Equipo de uretrocistoscopía",
@@ -74,7 +83,10 @@
     "resectoscopyGyrus": "Equipo de resectoscopía para Gyrus",
     "opticalForcepsDilators": "Pinzas ópticas y dilatadores uretrales",
     "accessInstruments": "Trocares, agujas y adaptadores",
-    "electrodesEndoscopes": "Electrodos y endoscopios"
+    "electrodesEndoscopes": "Electrodos y endoscopios",
+    "hysteroscopy": "Equipo de histeroscopía",
+    "electricHysteraCutter": "Morcelador uterino eléctrico",
+    "gynecologyInstruments": "Instrumentos de ginecología"
   },
   "variant": {
     "lockable": "con bloqueo",
@@ -108,7 +120,12 @@
     "multifunction": "multifunción",
     "pediatric": "pediátrico",
     "autoclavable": "autoclavable",
-    "lockableShort": "con bloqueo"
+    "lockableShort": "con bloqueo",
+    "fourClaws": "cuatro garras",
+    "doubleHeads": "doble punta",
+    "operatingRigid": "de trabajo, rígida",
+    "lavh": "LAVH",
+    "tah": "TAH"
   },
   "component": {
     "endoscope": "Endoscopio",
@@ -165,15 +182,31 @@
     "maleUrethralDilator": "Dilatador uretral masculino",
     "femaleUrethralDilator": "Dilatador uretral femenino",
     "filarSoundDilator": "Dilatador uretral filiforme, con cuchillo",
-    "penisClamp": "Pinza peneana"
+    "penisClamp": "Pinza peneana",
+    "operatingInnerSheath": "Vaina interna de trabajo",
+    "operatingSheath": "Vaina de trabajo",
+    "loopCatchingForceps": "Pinza captura-asas",
+    "cuttingTube": "Tubo de corte",
+    "uterusMeasuringStick": "Histerómetro",
+    "movingBar": "Varilla de desplazamiento",
+    "hysteromyomaDrill": "Tirabuzón para miomas",
+    "cervicalForceps": "Pinza de cuello uterino",
+    "uterineManipulator": "Manipulador uterino",
+    "trocarSleeve": "Camisa de trocar",
+    "reducer": "Reductor",
+    "knotPusher": "Empujanudos",
+    "vaginalSpeculum": "Espéculo vaginal",
+    "cervicalPolypForceps": "Pinza para pólipos cervicales",
+    "myomaElevator": "Elevador de miomas",
+    "oviductLigatureForceps": "Pinza de ligadura tubárica"
   },
   "specialties": {
     "title": "Dos especialidades",
     "urologyTitle": "Urología",
     "urologyLead": "Catalogada por completo para 2026. Dieciséis láminas de equipos, componentes y opciones.",
     "gynecologyTitle": "Ginecología",
-    "gynecologyLead": "Suministrada desde el año 2000; catálogo en preparación. Consúltenos disponibilidad y códigos de cualquiera de estas líneas.",
-    "gynecologyCta": "Solicitar códigos de ginecología",
+    "gynecologyLead": "Catalogada por completo para 2026. Equipos de histeroscopía, el morcelador uterino eléctrico e instrumentos de ginecología.",
+    "gynecologyCta": "Ver los equipos de ginecología",
     "urologyLines": [
       "Cistoscopios",
       "Ureteroscopios",
@@ -190,7 +223,8 @@
       "Resectoscopios",
       "Fibra óptica",
       "Pinzas"
-    ]
+    ],
+    "urologyCta": "Ver los equipos de urología"
   },
   "company": {
     "title": "La empresa",
@@ -220,11 +254,11 @@
   },
   "footer": {
     "rights": "Techno Standard Corp. · Instrumentos de urología y ginecología.",
-    "pdf": "Catálogo PDF"
+    "pdf": "Catálogos PDF"
   },
   "meta": {
     "title": "Urogynec Instruments · Instrumentos de urología y ginecología",
-    "description": "Instrumental endoscópico rígido de urología y ginecología de Techno Standard Corp. (EE. UU.). Equipos de cistoscopía, ureterorrenoscopía, nefroscopía, uretrotomía y resectoscopía con todos los códigos y calibres French. Suministrando desde el año 2000.",
+    "description": "Instrumental endoscópico rígido de urología y ginecología de Techno Standard Corp. (EE. UU.). Equipos de cistoscopía, ureterorrenoscopía, nefroscopía, uretrotomía, resectoscopía e histeroscopía con todos los códigos y calibres French. Suministrando desde el año 2000.",
     "ogLocale": "es_ES"
   }
 }

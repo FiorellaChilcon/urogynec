@@ -46,17 +46,19 @@ The canonical URL, the sitemap and the social-card URLs all assume
 - `src/locales/*.json`: every visible string, including the instrument
   vocabulary (`component.*`, `variant.*`) and the per-language page title and
   meta description. Specs stay language-neutral.
-- `src/assets/plates/p02…p17.webp`: the scanned catalogue pages, extracted with
-  `pdfimages` and converted with `cwebp`. They are bundled assets, so Vite
+- `src/assets/plates/p02…p17.webp` (urology) and `g01…g06.webp` (gynecology):
+  the scanned catalogue pages, extracted with `pdfimages` and converted with
+  `cwebp` / ImageMagick. They are bundled assets, so Vite
   hashes them, applies the base path and fails the build if one goes missing.
   `vite-imagetools` renders each one at 480 / 880 / 1400px and the components
   ship a `srcset` with a `sizes` hint, so a phone downloads 245 KB of plates
   where it used to download 984 KB. The 1400px version is only fetched when
   someone opens a plate on a wide screen.
-- `public/techno-standard-urology-catalogue-2026.pdf`: the original, offered as
-  a download. It stays in `public/` on purpose: it is a link people share, so
-  the URL must be stable and unhashed. That is the one place
-  `import.meta.env.BASE_URL` is still needed.
+- `public/techno-standard-urology-catalogue-2026.pdf` and
+  `public/techno-standard-gynecology-catalogue-2026.pdf`: the originals, offered
+  as downloads and listed in `src/data/catalogues.ts`. They stay in `public/` on
+  purpose: these are links people share, so the URLs must be stable and
+  unhashed. That is the one place `import.meta.env.BASE_URL` is still needed.
 
 ## Logo assets
 
@@ -95,11 +97,14 @@ every token is also a utility: `bg-drape-800`, `text-ink-500`, `text-section`,
 the system and why each decision was made; `PRODUCT.md` records product truth.
 Neither ships to the browser.
 
-## Adding the gynecology catalogue later
+## Adding more sets
 
-1. Drop the new page images into `public/plates/`.
-2. Add entries to `sets.ts` with `specialty: 'gynecology'` and any new `family`
-   keys.
-3. Add the family labels and any new `component.*` keys to both locale files.
-4. Filter or split the grid by `specialty` in `CatalogueSection.vue`. The data
-   already carries the field; the section currently renders every set.
+1. Drop the page images into `src/assets/plates/`.
+2. Add entries to `sets.ts` with their `specialty`, `family`, printed `page`
+   number and components.
+3. Add any new `component.*`, `variant.*`, `set.*` or `family.*` keys to **both**
+   locale files. `npm run build` does not catch a missing key, but
+   `.context/framecheck.sh` and the key check in the commit history do.
+4. Several sets can share one plate: give each its own `focus` percentage so the
+   card window lands on that set's instruments rather than the printed heading.
+   `.context/framecheck.sh` renders exactly what every card window will show.

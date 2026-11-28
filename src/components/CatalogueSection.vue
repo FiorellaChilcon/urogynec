@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { families, sets, type InstrumentSet } from '../data/sets'
+import { families, sets, specialties, type InstrumentSet } from '../data/sets'
+import { catalogues } from '../data/catalogues'
+import { specialtyFilter } from '../catalogueFilter'
 import { useSetLabel } from '../useSetLabel'
 import SetCard from './SetCard.vue'
 import PlateDialog from './PlateDialog.vue'
@@ -13,11 +15,9 @@ const query = ref('')
 const family = ref<string>('all')
 const open = ref<InstrumentSet | null>(null)
 
-const pdfUrl = `${import.meta.env.BASE_URL}techno-standard-urology-catalogue-2026.pdf`
-
 /**
- * Fold accents and separators so "ureterorrenoscopia", "A1114" and "21 Fr"
- * all match what the client actually types. The one regex in the app: the
+ * Fold accents and separators so "histeroscopia", "F1116.3" and "21 Fr" all
+ * match what the client actually types. The one regex in the app: the
  * combining-mark range has no non-regex equivalent in the standard library.
  */
 const normalise = (s: string) =>
@@ -33,48 +33,97 @@ const haystack = (s: InstrumentSet) =>
       s.model,
       setName(s),
       t(`family.${s.family}`),
+      t(`specialties.${s.specialty}Title`),
       ...(s.fr ?? []).map((g) => `${g}Fr`),
       ...(s.compat ?? []),
       ...s.components.flatMap((c) => [c.code, componentName(c), c.spec ?? '']),
     ].join(' '),
   )
 
-/** Printed catalogue order. */
-const ordered = [...sets].sort((a, b) => a.page - b.page)
+/** Printed catalogue order, urology first. */
+const ordered = [...sets].sort(
+  (a, b) => a.specialty.localeCompare(b.specialty) * -1 || a.page - b.page,
+)
+
+const inSpecialty = computed(() =>
+  ordered.filter((s) => specialtyFilter.value === 'all' || s.specialty === specialtyFilter.value),
+)
+
+/** Only offer families that exist in the chosen specialty. */
+const availableFamilies = computed(() =>
+  families.filter((f) => inSpecialty.value.some((s) => s.family === f)),
+)
+
+watch(availableFamilies, (list) => {
+  if (family.value !== 'all' && !list.includes(family.value as (typeof families)[number])) {
+    family.value = 'all'
+  }
+})
 
 const visible = computed(() => {
   const q = normalise(query.value.trim())
-  return ordered.filter(
+  return inSpecialty.value.filter(
     (s) => (family.value === 'all' || s.family === family.value) && (!q || haystack(s).includes(q)),
   )
 })
+
+const downloads = computed(() =>
+  catalogues.filter(
+    (c) => specialtyFilter.value === 'all' || c.specialty === specialtyFilter.value,
+  ),
+)
 </script>
 
 <template>
   <section id="catalogue" aria-labelledby="catalogue-title" class="bg-plate-050 py-section text-ink-900">
     <div class="page">
-      <header
-        class="flex flex-wrap items-end justify-between gap-7 border-b border-plate-line pb-8"
-      >
+      <header class="flex flex-wrap items-end justify-between gap-7 border-b border-plate-line pb-8">
         <div>
           <h2 id="catalogue-title" class="text-section text-ink-900">{{ t('catalogue.title') }}</h2>
-          <p class="mt-3.5 max-w-[62ch] text-lead text-ink-500">{{ t('catalogue.lead') }}</p>
+          <p class="mt-3.5 max-w-[62ch] text-lead text-ink-500">
+            {{ t('catalogue.lead', { sets: sets.length }) }}
+          </p>
         </div>
-        <a class="btn btn-light flex-wrap" :href="pdfUrl" download>
-          {{ t('catalogue.downloadPdf') }}
-          <span class="code text-label tracking-[0.06em] text-ink-500">
-            {{ t('catalogue.pdfMeta') }}
-          </span>
-        </a>
+        <div class="flex flex-wrap gap-2.5">
+          <a v-for="c in downloads" :key="c.specialty" class="btn btn-light flex-wrap" :href="c.url" download>
+            {{ t(`catalogue.download.${c.specialty}`) }}
+            <span class="code text-label tracking-[0.06em] text-ink-500">
+              {{ t('catalogue.pdfMeta', { pages: c.pages, mb: c.mb }) }}
+            </span>
+          </a>
+        </div>
       </header>
 
       <div
         class="sticky top-18 z-20 flex flex-wrap items-center gap-x-6 gap-y-3 border-b border-plate-line bg-plate-050 py-4.5"
       >
+        <div class="flex border border-plate-line" role="group" :aria-label="t('catalogue.specialtyLabel')">
+          <button
+            type="button"
+            class="seg"
+            :class="specialtyFilter === 'all' ? 'seg-on' : ''"
+            :aria-pressed="specialtyFilter === 'all'"
+            @click="specialtyFilter = 'all'"
+          >
+            {{ t('catalogue.all') }}
+          </button>
+          <button
+            v-for="sp in specialties"
+            :key="sp"
+            type="button"
+            class="seg not-first:border-l not-first:border-plate-line"
+            :class="specialtyFilter === sp ? 'seg-on' : ''"
+            :aria-pressed="specialtyFilter === sp"
+            @click="specialtyFilter = sp"
+          >
+            {{ t(`specialties.${sp}Title`) }}
+          </button>
+        </div>
+
         <div
           class="-mx-page flex gap-1.5 overflow-x-auto px-page [scrollbar-width:none] md:mx-0 md:flex-wrap md:overflow-visible md:px-0 [&::-webkit-scrollbar]:hidden"
           role="group"
-          :aria-label="t('catalogue.title')"
+          :aria-label="t('catalogue.familyLabel')"
         >
           <button
             type="button"
@@ -83,10 +132,10 @@ const visible = computed(() => {
             :aria-pressed="family === 'all'"
             @click="family = 'all'"
           >
-            {{ t('catalogue.all') }}
+            {{ t('catalogue.allFamilies') }}
           </button>
           <button
-            v-for="f in families"
+            v-for="f in availableFamilies"
             :key="f"
             type="button"
             class="chip"
@@ -102,13 +151,7 @@ const visible = computed(() => {
           class="relative flex max-w-96 flex-1 basis-60 items-center border border-plate-line bg-plate-000 transition-colors focus-within:border-teal-500"
         >
           <label class="sr-only" for="catalogue-search">{{ t('catalogue.searchLabel') }}</label>
-          <svg
-            class="ml-2.5 shrink-0 text-ink-500"
-            viewBox="0 0 24 24"
-            width="17"
-            height="17"
-            aria-hidden="true"
-          >
+          <svg class="ml-2.5 shrink-0 text-ink-500" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
             <circle cx="11" cy="11" r="6.4" fill="none" stroke="currentColor" stroke-width="1.5" />
             <path d="M15.8 15.8L21 21" fill="none" stroke="currentColor" stroke-width="1.5" />
           </svg>
@@ -172,5 +215,13 @@ const visible = computed(() => {
 
 .chip-on {
   @apply border-drape-800 bg-drape-800 text-on-drape;
+}
+
+.seg {
+  @apply cursor-pointer bg-transparent px-3.5 py-1.5 text-sm whitespace-nowrap text-ink-700 transition-colors hover:text-ink-900;
+}
+
+.seg-on {
+  @apply bg-teal-500 text-[#04161c];
 }
 </style>

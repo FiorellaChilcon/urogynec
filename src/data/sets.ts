@@ -71,13 +71,20 @@ export interface Plate {
   srcset: string
 }
 
-const plate = (n: number): Plate => {
-  const key = `../assets/plates/p${String(n).padStart(2, '0')}.webp`
+const resolvePlate = (key: string): Plate => {
   const src = plateUrls[key]
   const srcset = plateSrcsets[key]
   if (!src || !srcset) throw new Error(`Catalogue plate missing: ${key}`)
   return { src, srcset }
 }
+
+/** Urology catalogue plate, by printed plate number. */
+const plate = (n: number): Plate =>
+  resolvePlate(`../assets/plates/p${String(n).padStart(2, '0')}.webp`)
+
+/** Gynecology catalogue plate, by printed plate number. */
+const gyn = (n: number): Plate =>
+  resolvePlate(`../assets/plates/g${String(n).padStart(2, '0')}.webp`)
 
 export const sets: InstrumentSet[] = [
   {
@@ -523,6 +530,239 @@ export const sets: InstrumentSet[] = [
       { code: 'A3160.3S', type: 'workingElement', variant: 'active', spec: '30° · model 4' },
     ],
   },
+  // ── Gynecology ─────────────────────────────────────────────────────────
+  {
+    id: 'bh-01',
+    model: 'BH-01',
+    name: 'hysteroscopy',
+    family: 'hysteroscopy',
+    specialty: 'gynecology',
+    page: 1,
+    plate: gyn(1),
+    focus: 14,
+    components: [
+      { code: 'N6001', type: 'endoscope', spec: '0° · Ø4 × 302 mm' },
+      { code: 'N1002', type: 'endoscope', spec: '0° · Ø3 × 302 mm' },
+      { code: 'N6002', type: 'endoscope', spec: '30° · Ø4 × 302 mm' },
+      { code: 'N1002.1', type: 'endoscope', spec: '30° · Ø3 × 302 mm' },
+      { code: 'G2005', type: 'sheath', spec: 'Ø3 × 310 mm' },
+      { code: 'G2005.1', type: 'sheath', spec: 'Ø4 × 310 mm' },
+      { code: 'G2005.2', type: 'obturator' },
+      { code: 'N6016', type: 'adaptor' },
+      { code: 'A6017', type: 'sealingCap' },
+      { code: 'A2002', type: 'lightGuide', spec: 'Ø4 × 2000 mm' },
+    ],
+  },
+  {
+    id: 'bh-02',
+    model: 'BH-02',
+    name: 'hysteroscopy',
+    family: 'hysteroscopy',
+    specialty: 'gynecology',
+    page: 1,
+    plate: gyn(1),
+    focus: 65,
+    components: [
+      { code: 'BN6001', type: 'endoscope', spec: '0° · Ø4 × 302 mm' },
+      { code: 'BN6002', type: 'endoscope', spec: '30° · Ø4 × 302 mm' },
+      { code: 'BN6003', type: 'endoscope', spec: '70° · Ø4 × 302 mm' },
+      { code: 'BN7006', type: 'sheathObturator' },
+      { code: 'BN7008', type: 'manipulator', variant: 'twoChannel' },
+      { code: 'BN6010', type: 'biopsyForceps', variant: 'flexible', spec: 'Ø1.6 × 360 mm' },
+      { code: 'BN6011', type: 'foreignBodyForceps', variant: 'flexible', spec: 'Ø1.6 × 360 mm' },
+      { code: 'BN6012', type: 'serratedForceps', variant: 'flexible', spec: 'Ø1.6 × 360 mm' },
+      { code: 'BN6013', type: 'scissors', variant: 'flexible', spec: 'Ø1.6 × 360 mm' },
+      { code: 'BN6016', type: 'adaptor' },
+      { code: 'BT5010', type: 'lightGuide', spec: 'Ø4 × 2000 mm' },
+    ],
+  },
+  {
+    id: 'bh-03-04',
+    model: 'BH-03 / BH-04',
+    name: 'hysteroscopy',
+    family: 'hysteroscopy',
+    specialty: 'gynecology',
+    page: 2,
+    plate: gyn(2),
+    focus: 15,
+    components: [
+      { code: 'N6002', type: 'endoscope', spec: '30° · Ø4 × 302 mm' },
+      { code: 'N1002.1', type: 'endoscope', spec: '30° · Ø3 × 302 mm' },
+      { code: 'G2008', type: 'sheathObturator', spec: 'Ø4' },
+      { code: 'G2007', type: 'sheathObturator', spec: 'Ø3' },
+      { code: 'G2008.1', type: 'operatingInnerSheath', spec: 'Ø4 mm endoscope' },
+      { code: 'G2007.1', type: 'operatingInnerSheath', spec: 'Ø3 mm endoscope' },
+      { code: 'N8004.1', type: 'biopsyForceps', variant: 'rigid', spec: 'Ø1.6 × 360 mm' },
+      { code: 'N8004.2', type: 'foreignBodyForceps', variant: 'rigid', spec: 'Ø1.6 × 360 mm' },
+      { code: 'N8004.3', type: 'serratedForceps', variant: 'rigid', spec: 'Ø1.6 × 360 mm' },
+      { code: 'N8004', type: 'scissors', variant: 'rigid', spec: 'Ø1.6 × 360 mm' },
+      { code: 'N8003.2', type: 'biopsyForceps', variant: 'flexible', spec: 'Ø1.6 × 360 mm' },
+      { code: 'N8003.3', type: 'foreignBodyForceps', variant: 'flexible', spec: 'Ø1.6 × 360 mm' },
+      { code: 'N8003.5', type: 'serratedForceps', variant: 'flexible', spec: 'Ø1.6 × 360 mm' },
+      { code: 'N8003.4', type: 'scissors', variant: 'flexible', spec: 'Ø1.6 × 360 mm' },
+      { code: 'A2002', type: 'lightGuide', spec: 'Ø4 × 2000 mm' },
+      { code: 'N6016', type: 'adaptor' },
+      { code: 'A6017', type: 'sealingCap' },
+    ],
+  },
+  {
+    id: 'gq-3',
+    model: 'GQ-3',
+    name: 'hysteroscopy',
+    family: 'hysteroscopy',
+    specialty: 'gynecology',
+    page: 3,
+    plate: gyn(3),
+    focus: 8,
+    fr: [24],
+    components: [
+      { code: 'A0012', type: 'endoscope', spec: '30° · Ø4 × 302 mm' },
+      { code: 'F1115', type: 'operatingSheath', spec: '24 Fr' },
+    ],
+  },
+  {
+    id: 'gq-13',
+    model: 'GQ-13',
+    name: 'hysteroscopy',
+    family: 'hysteroscopy',
+    specialty: 'gynecology',
+    page: 3,
+    plate: gyn(3),
+    focus: 38,
+    fr: [21],
+    components: [
+      { code: 'A0012', type: 'endoscope', spec: '30° · Ø4 × 302 mm' },
+      { code: 'F1116.3', type: 'outerSheath', spec: '30° · 21 Fr' },
+      { code: 'F1117.3', type: 'manipulator' },
+    ],
+  },
+  {
+    id: 'gq-18',
+    model: 'GQ-18',
+    name: 'hysteroscopy',
+    family: 'hysteroscopy',
+    specialty: 'gynecology',
+    page: 3,
+    plate: gyn(3),
+    focus: 68,
+    fr: [7, 16.5],
+    components: [
+      { code: 'F0112', type: 'endoscope', spec: '30° · 16.5 Fr × 201 mm' },
+      { code: 'A2101.1', type: 'biopsyForceps', variant: 'rigid', spec: '7 Fr × 395 mm' },
+      { code: 'A2102.1', type: 'foreignBodyForceps', variant: 'rigid', spec: '7 Fr × 395 mm' },
+      { code: 'A2104.1', type: 'scissors', variant: 'rigid', spec: '7 Fr × 395 mm' },
+      { code: 'F2107.3', type: 'loopCatchingForceps', variant: 'rigid', spec: '7 Fr × 395 mm' },
+      { code: 'BN8006.1', type: 'graspingForceps', variant: 'fourClaws', spec: 'Ø2.1 × 400 mm' },
+    ],
+  },
+  {
+    id: 'gq-8',
+    model: 'GQ-8',
+    name: 'hysteroscopy',
+    family: 'hysteroscopy',
+    specialty: 'gynecology',
+    page: 4,
+    plate: gyn(4),
+    focus: 13,
+    fr: [14.5, 17.5],
+    components: [
+      { code: 'A0012', type: 'endoscope', spec: '30° · Ø4 × 302 mm' },
+      { code: 'F1101.1', type: 'outerSheath', spec: '17.5 Fr' },
+      { code: 'F1102.1', type: 'innerSheath', spec: '14.5 Fr' },
+      { code: 'T1009.1', type: 'luerAdaptor' },
+      { code: 'T1001', type: 'adaptor' },
+      { code: 'T5010', type: 'lightGuide', spec: 'Ø4.5 × 2000 mm' },
+    ],
+  },
+  {
+    id: 'gq-10',
+    model: 'GQ-10',
+    name: 'hysteroscopy',
+    family: 'hysteroscopy',
+    specialty: 'gynecology',
+    page: 4,
+    plate: gyn(4),
+    focus: 49,
+    fr: [11.7, 15],
+    components: [
+      { code: 'A0022', type: 'endoscope', spec: '30° · Ø2.9 × 302 mm' },
+      { code: 'F1104', type: 'outerSheath', spec: '15 Fr' },
+      { code: 'F1105', type: 'innerSheath', spec: '11.7 Fr' },
+      { code: 'T1009.1', type: 'luerAdaptor' },
+      { code: 'T1001', type: 'adaptor' },
+      { code: 'T5010', type: 'lightGuide', spec: 'Ø4.5 × 2000 mm' },
+    ],
+  },
+  {
+    id: 'gq-16',
+    model: 'GQ-16',
+    name: 'hysteroscopy',
+    family: 'hysteroscopy',
+    specialty: 'gynecology',
+    page: 4,
+    plate: gyn(4),
+    focus: 81,
+    fr: [5, 16.5],
+    components: [
+      { code: 'A0022', type: 'endoscope', spec: '30° · Ø2.9 × 302 mm' },
+      { code: 'F1118', type: 'sheath', spec: '30° · 16.5 Fr × 212 mm' },
+      { code: 'A4010.1', type: 'cleaningBar', spec: 'Ø1 × 2000 mm' },
+      { code: 'F1110.1', type: 'biopsyForceps', variant: 'operatingRigid', spec: '5 Fr × 340 mm' },
+      { code: 'F1113.1', type: 'scissors', variant: 'rigid', spec: '5 Fr × 340 mm' },
+      { code: 'F2107.2', type: 'loopCatchingForceps', variant: 'rigid', spec: '5 Fr × 340 mm' },
+    ],
+  },
+  {
+    id: 'men-a',
+    model: 'MEN-A',
+    name: 'electricHysteraCutter',
+    family: 'hysterectomy',
+    specialty: 'gynecology',
+    page: 5,
+    plate: gyn(5),
+    focus: 15,
+    components: [
+      { code: '800', type: 'cuttingTube', variant: 'lavh', spec: 'Ø18 mm' },
+      { code: '802', type: 'cuttingTube', variant: 'lavh', spec: 'Ø15 mm' },
+      { code: '803', type: 'cuttingTube', variant: 'tah', spec: 'Ø18 mm' },
+      { code: '804', type: 'cuttingTube', variant: 'tah', spec: 'Ø15 mm' },
+      { code: '805', type: 'uterusMeasuringStick', spec: 'Ø5 mm' },
+      { code: '806', type: 'movingBar', spec: 'Ø5 mm' },
+      { code: '807', type: 'hysteromyomaDrill', spec: 'Ø10 mm' },
+      { code: '808', type: 'hysteromyomaDrill', spec: 'Ø5 mm' },
+      { code: '809', type: 'graspingForceps', spec: 'Ø10 mm' },
+      { code: '810', type: 'graspingForceps', spec: 'Ø5 mm' },
+      { code: '812', type: 'cervicalForceps', variant: 'straight' },
+      { code: '812-2', type: 'cervicalForceps', variant: 'curved' },
+      { code: '813', type: 'dilator', spec: 'Ø18–10 mm' },
+      { code: '813-1', type: 'dilator', spec: 'Ø15–10 mm' },
+      { code: '814', type: 'uterineManipulator' },
+      { code: '818', type: 'trocarSleeve', spec: 'Ø18 mm' },
+      { code: '818-1', type: 'trocarSleeve', spec: 'Ø15 mm' },
+      { code: '821', type: 'reducer', spec: 'Ø15–5 mm' },
+      { code: '821-1', type: 'reducer', spec: 'Ø18–5 mm' },
+      { code: 'A217', type: 'knotPusher', spec: 'Ø5 mm' },
+    ],
+  },
+  {
+    id: 'gyn-instruments',
+    model: 'F20xx',
+    name: 'gynecologyInstruments',
+    family: 'options',
+    specialty: 'gynecology',
+    page: 6,
+    plate: gyn(6),
+    focus: 72,
+    components: [
+      { code: 'F2042.1', type: 'vaginalSpeculum', spec: '35 × 100 mm' },
+      { code: 'F2042.2', type: 'vaginalSpeculum', spec: '35 × 85 mm' },
+      { code: 'F2042.3', type: 'vaginalSpeculum', spec: '32 × 75 mm' },
+      { code: 'F2039', type: 'cervicalPolypForceps', spec: '210 mm' },
+      { code: 'F2037', type: 'myomaElevator', variant: 'doubleHeads', spec: 'Ø10 × 400 mm' },
+      { code: 'F2038', type: 'myomaElevator', variant: 'doubleHeads', spec: 'Ø5 × 400 mm' },
+      { code: 'F2004', type: 'oviductLigatureForceps', spec: 'Ø5.8 × 350 mm' },
+    ],
+  },
 ]
 
 /** Catalogue families in reading order. */
@@ -533,16 +773,20 @@ export const families = [
   'lithotripsy',
   'ureteroscopy',
   'resectoscopy',
+  'hysteroscopy',
+  'hysterectomy',
   'options',
 ] as const
+
+export const specialties = ['urology', 'gynecology'] as const
 
 /**
  * Every French gauge printed anywhere in the 2026 catalogue, smallest to
  * largest. This is the hero's measured axis: it is data, not decoration.
  */
 export const gaugeRange = [
-  3, 4.5, 4.9, 5, 5.5, 6, 6.5, 7, 7.5, 9, 10.5, 11, 12.5, 13, 13.5, 15.5, 16.5, 18, 18.5, 19, 20,
-  21, 22, 23, 24, 24.5, 26, 26.5, 30, 42,
+  3, 4.5, 4.9, 5, 5.5, 6, 6.5, 7, 7.5, 9, 10.5, 11, 11.7, 12.5, 13, 13.5, 14.5, 15, 15.5, 16.5,
+  17.5, 18, 18.5, 19, 20, 21, 22, 23, 24, 24.5, 26, 26.5, 30, 42,
 ]
 
 /** The gauges that carry a printed label on the axis. */
